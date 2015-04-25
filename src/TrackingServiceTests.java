@@ -5,6 +5,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
+import static org.junit.Assert.*; 
+import static org.hamcrest.CoreMatchers.*; 
+import static org.junit.matchers.JUnitMatchers.*; 
+
 
 public class TrackingServiceTests {
 	private TrackingService service;
@@ -34,7 +38,8 @@ public class TrackingServiceTests {
 	public void WhenAddingProteinTotalIncreasesByThatAmount () 
 	{
 		service.addProtein(10); 
-		assertEquals("Service amount was not correct", 10, service.getTotal());
+		assertThat(service.getTotal(), is(10));
+		assertThat(service.getTotal(), allOf(is(10), instanceOf(Integer.class)));
 	}
 	@Test
 	@Category(GoodTestsCategory.class)
@@ -47,10 +52,10 @@ public class TrackingServiceTests {
 	public void WhenGoalIsSetToLessThanZeroExceptionIsThrown() throws InvalidGoalException { 
 		service.setGoal(-5);
 	}
-	@Test(timeout = 200)
-	public void BadTest(){
-		for (int i = 0; i < 10000000; i++){
-			service.addProtein(1); 
-		}
-	}
+	//@Test(timeout = 200)
+	//public void BadTest(){
+		//for (int i = 0; i < 10000000; i++){
+			//service.addProtein(1); 
+		//}
+	//}
 }
